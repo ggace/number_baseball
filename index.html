@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+
+      .how_many{
+        background-color: #ffbb24;
+        border-radius: 12px;
+        width: 360px;
+        margin: 24px;
+        padding : 24px;
+        text-align: center;
+
+      }
+      span{
+
+        font-size: 3em;
+        font-weight: bold;
+        color: white;
+        text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.33);
+      }
+      #button{
+        display: inline;
+      }
+      #play{
+        display: None;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="how_many">
+      <span>숫자 야구 게임</span>
+      <div id="button">
+        <br>
+        <h4>숫자의 자릿수를 정해주세요</h4>
+        <input value="2" type="button" name="button" style="left:40%" onclick="how_many(2)"></input>
+        <input value="3" type="button" name="button" style="left:50%" onclick="how_many(3)"></input>
+        <input value="4" type="button" name="button" style="left:60%" onclick="how_many(4)"></input>
+      </div>
+      <div id="play">
+        <input id="input" type="text" placeholder="숫자를 입력해주세요">
+        <div id="list">
+          <p></p>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+    <br>
+    <br>
+    <br>
+    <a href="https://www.youtube.com/watch?v=ffENjt7aEdc">얄팍한 코딩사전</a>
+
+    <script type="text/javascript">
+      var ind = document.getElementById("input");
+      var rand;
+
+
+      var strike = 0;
+      var ball = 0;
+
+      function how_many(n){
+        count = n;
+        document.querySelector('#button').style.display="None";
+        document.querySelector('#play').style.display="inline";
+        console.log(count);
+        rand = random_num(count);
+        console.log(rand);
+      }
+      ind.addEventListener("keyup", function(e) {
+        if(e.code === "Enter"){
+          strike = 0;
+          ball = 0;
+          var inputd = document.querySelector('#input').value;
+          document.querySelector("#input").value = "";
+
+          try{
+            inputd = parseInt(inputd);
+          }
+          catch{
+            console.log();
+          }
+          var right = 0;
+          if(Number.isInteger(inputd)){
+            rand = String(rand);
+            inputd = String(inputd);
+            for(var i = 0; i < count; i++){
+              if(rand[i] == inputd[i]){
+                strike++;
+              }
+            }
+            if(strike == count){
+              alert("home run");
+              return 0;
+            }
+
+            else{
+              for(var i = 0; i < count; i++){
+                for(var x = 0; x < count; x++){
+                  if(inputd[x] == rand[i]){
+                    ball++;
+                  }
+                }
+              }
+              console.log(strike);
+              console.log(ball-strike);
+              strike = String(strike);
+              ball = String(ball);
+              alert("strike : "+strike+"\nball :"+ball);
+              strike = parseInt(strike);
+              ball = parseInt(ball);
+            }
+
+          }
+          else{
+            alert("Please right number");
+          }
+        }
+
+      })
+
+    </script>
+
+    <script src="system.js"></script>
+  </body>
+</html>
